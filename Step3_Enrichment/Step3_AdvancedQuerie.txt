@@ -1,0 +1,179 @@
+=== Query 1
+
+{
+    "search": "search=DevOps",
+    "select": "level,role,instructor, duration, rating_average, entities",
+    "filter": "level ne 'advanced' ",
+    "top": 1
+}
+
+{
+  "@odata.context": "https://cognitive-search-example.search.windows.net/indexes('courses-index')/$metadata#docs(*)",
+  "value": [
+    {
+      "@search.score": 3.8318858,
+      "duration": "5",
+      "instructor": "Claudia Blackman",
+      "level": "intermediate",
+      "rating_average": 4.9,
+      "role": "admin",
+      "entities": "[{\"name\":\"Claudia Blackman\",\"description\":\"Claudia is our senior DevOps engineer. She is charged with overseeing our DevOps operations and has been with the company for 2 years. Claudia enjoys downhill skiing and is a member of the local Search & Rescue Team.\",\"matches\":[{\"text\":\"Claudia Blackman\",\"offset\":0,\"length\":16,\"matchDistance\":0.0}]}]"
+    }
+  ]
+}
+
+
+=== Query 2
+
+{
+    "search": "search=AI",
+    "select": "level,role,instructor, duration, rating_average, entities, keyphrases",
+    "filter": "level ne 'beginner' and entities ne null",
+    "top": 1
+}
+
+{
+  "@odata.context": "https://cognitive-search-example.search.windows.net/indexes('courses-index')/$metadata#docs(*)",
+  "value": [
+    {
+      "@search.score": 4.5091386,
+      "duration": "1",
+      "instructor": "Eileen Diaz",
+      "level": "intermediate",
+      "rating_average": 4.3,
+      "role": "architect",
+      "keyphrases": [
+        "Responsible Use",
+        "company",
+        "Principles",
+        "AI"
+      ],
+      "entities": "[{\"name\":\"Eileen Diaz\",\"description\":\"Eileen is our Senior Security Engineer responsible for application and service security. She has been with the company for 9 years and enjoys writing Sci-Fi in her spare time.\",\"matches\":[{\"text\":\"Eileen Diaz\",\"offset\":0,\"length\":11,\"matchDistance\":0.0}]}]"
+    }
+  ]
+}
+
+
+=== Query 3
+
+{
+    "search": "search=AI",
+    "select": " metadata_title,metadata_author,publicationName,publisher,publicationDate, doi",
+    "top": 3
+}
+
+{
+  "@odata.context": "https://cognitive-search-example.search.windows.net/indexes('azureblob-index')/$metadata#docs(*)",
+  "value": [
+    {
+      "@search.score": 4.8920007,
+      "metadata_author": "Alina Köchling ",
+      "metadata_title": "Discriminated by an algorithm: a systematic review of discrimination and fairness by algorithmic decision-making in the context of HR recruitment and HR development",
+      "publisher": "Springer",
+      "doi": "10.1007/s40685-020-00134-w",
+      "publicationName": "Business Research",
+      "publicationDate": "2020-11-01"
+    },
+    {
+      "@search.score": 3.1117277,
+      "metadata_author": "Tuba Parlar ",
+      "metadata_title": "QER: a new feature selection method for sentiment analysis",
+      "publisher": "Springer",
+      "doi": "10.1186/s13673-018-0135-8",
+      "publicationName": "Human-centric Computing and Information Sciences",
+      "publicationDate": "2018-05-09"
+    },
+    {
+      "@search.score": 2.507882,
+      "metadata_author": "Taiwo Kolajo ",
+      "metadata_title": "Big data stream analysis: a systematic literature review",
+      "publisher": "Springer",
+      "doi": "10.1186/s40537-019-0210-7",
+      "publicationName": "Journal of Big Data",
+      "publicationDate": "2019-06-06"
+    }
+  ]
+}
+
+=== Query 4
+
+{
+    "search": "search=",
+    "select": " metadata_title,metadata_author,publicationName,publisher,publicationDate, doi",
+    "filter": "publicationDate eq '2018-05-09'",
+}
+
+{
+  "@odata.context": "https://cognitive-search-example.search.windows.net/indexes('azureblob-index')/$metadata#docs(*)",
+  "value": [
+    {
+      "@search.score": 2.2420135,
+      "metadata_author": "Tuba Parlar ",
+      "metadata_title": "QER: a new feature selection method for sentiment analysis",
+      "publisher": "Springer",
+      "doi": "10.1186/s13673-018-0135-8",
+      "publicationName": "Human-centric Computing and Information Sciences",
+      "publicationDate": "2018-05-09"
+    }
+  ]
+}
+
+=== Query 5
+
+{
+    "search": "*",
+    "select": " metadata_title,metadata_author,publicationName,publisher,publicationDate, doi",
+    "filter": "search.ismatch('Big Data', 'publicationName')",
+    "orderby": "metadata_author asc"
+    }
+
+    {
+  "@odata.context": "https://cognitive-search-example.search.windows.net/indexes('azureblob-index')/$metadata#docs(*)",
+  "value": [
+    {
+      "@search.score": 1,
+      "metadata_author": "Iqbal H. Sarker ",
+      "metadata_title": "Context-aware rule learning from smartphone data: survey, challenges and future directions",
+      "publisher": "Springer",
+      "doi": "10.1186/s40537-019-0258-4",
+      "publicationName": "Journal of Big Data",
+      "publicationDate": "2019-10-31"
+    },
+    {
+      "@search.score": 1,
+      "metadata_author": "P. Ram Mohan Rao ",
+      "metadata_title": "Privacy preservation techniques in big data analytics: a survey",
+      "publisher": "Springer",
+      "doi": "10.1186/s40537-018-0141-8",
+      "publicationName": "Journal of Big Data",
+      "publicationDate": "2018-09-22"
+    },
+    {
+      "@search.score": 1,
+      "metadata_author": "Sandhya Narayanan ",
+      "metadata_title": "Improving prediction with enhanced Distributed Memory-based Resilient Dataset Filter",
+      "publisher": "Springer",
+      "doi": "10.1186/s40537-020-00292-y",
+      "publicationName": "Journal of Big Data",
+      "publicationDate": "2020-02-28"
+    },
+    {
+      "@search.score": 1,
+      "metadata_author": "Taiwo Kolajo ",
+      "metadata_title": "Big data stream analysis: a systematic literature review",
+      "publisher": "Springer",
+      "doi": "10.1186/s40537-019-0210-7",
+      "publicationName": "Journal of Big Data",
+      "publicationDate": "2019-06-06"
+    },
+    {
+      "@search.score": 1,
+      "metadata_author": "Tu Nguyen Thi Ngoc ",
+      "metadata_title": "Mining aspects of customer’s review on the social network",
+      "publisher": "Springer",
+      "doi": "10.1186/s40537-019-0184-5",
+      "publicationName": "Journal of Big Data",
+      "publicationDate": "2019-02-28"
+    }
+  ]
+}

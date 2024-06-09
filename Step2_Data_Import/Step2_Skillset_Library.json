@@ -1,0 +1,74 @@
+{
+    "@odata.context": "https://cognitive-search-example.search.windows.net/$metadata#skillsets/$entity",
+    "@odata.etag": "\"0x8DC8374C3BA27AD\"",
+    "name": "azureblob-skillset",
+    "description": "Skillset created from the portal. skillsetName: azureblob-skillset; contentField: content; enrichmentGranularity: document; knowledgeStoreStorageAccount: ;",
+    "skills": [
+      {
+        "@odata.type": "#Microsoft.Skills.Text.V3.EntityRecognitionSkill",
+        "name": "#1",
+        "description": null,
+        "context": "/document/content",
+        "categories": [
+          "Address",
+          "Location",
+          "PersonType",
+          "Quantity",
+          "PhoneNumber",
+          "URL",
+          "Email",
+          "Skill",
+          "DateTime",
+          "Person",
+          "Event",
+          "Product",
+          "Organization",
+          "IPAddress"
+        ],
+        "defaultLanguageCode": "en",
+        "minimumPrecision": null,
+        "modelVersion": null,
+        "inputs": [
+          {
+            "name": "text",
+            "source": "/document/content"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "organizations",
+            "targetName": "organizations"
+          },
+          {
+            "name": "persons",
+            "targetName": "people"
+          }
+        ]
+      },
+      {
+        "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+        "name": "#2",
+        "description": null,
+        "context": "/document/content",
+        "defaultLanguageCode": "en",
+        "maxKeyPhraseCount": null,
+        "modelVersion": null,
+        "inputs": [
+          {
+            "name": "text",
+            "source": "/document/content"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "keyPhrases",
+            "targetName": "keyphrases"
+          }
+        ]
+      }
+    ],
+    "cognitiveServices": null,
+    "knowledgeStore": null,
+    "indexProjections": null,
+    "encryptionKey": null
+  }
